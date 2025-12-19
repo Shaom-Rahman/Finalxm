@@ -5,12 +5,17 @@ const cors = require('cors')
 const dbConnection = require('./db')
 const route  = require('./src/routes/routes')
 require('dotenv').config()  
-const port = 8000
+ 
+const port = process.env.PORT || 8000
 
 // ------------------- all middleware---------------
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
 app.use(cors())
-app.use(route)
+ app.use('/api', route)
+
+
 
 // -------------------- db connections -------------
 dbConnection()   
